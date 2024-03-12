@@ -36,6 +36,8 @@ class A1natasAI:
 
         api_key = self.api_keys[self.api_key_index]
         self.client = OpenAI(api_key=api_key, base_url=self.base_url)
+        
+        return True if self.client else False
 
     def create(
         self,
