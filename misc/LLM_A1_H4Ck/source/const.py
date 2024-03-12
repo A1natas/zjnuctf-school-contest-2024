@@ -1,9 +1,5 @@
 from os import environ
 
-#! init proxy
-PROXY = environ.get("proxy", "http://127.0.0.1:7890")
-environ["http_proxy"] = environ["https_proxy"] = PROXY
-
 #! init openai apt
 OPENAI_API = "https://api.openai.com/v1"
 OPENAI_KEY = environ.get("OPENAI_KEY")

@@ -45,7 +45,7 @@ def challenge_two(user_input: str) -> str:
             with NamedTemporaryFile(mode="w", delete=True) as file:
                 file.write(code)
                 file.flush()
-                return check_output(["/usr/bin/python3", file.name]).decode()
+                return check_output(["/usr/local/bin/python3", file.name]).decode()
         except Exception as e:
             return f"Exec code error: {e}"
 
