@@ -1,0 +1,17 @@
+version: "2.1"
+
+services:
+    LLM_A1_H4Ck:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: llm_a1_h4ck:zjnuctf20204
+        environment:
+            - FLAG1=zjnuctf{Ez4I_Pr0mpT_1n73cti0n}
+            - FLAG2=zjnuctf{Ex3c_Pyth0n_C0d3_1s_V3r7_Ezzz!}
+            - FLAG3=zjnuctf{LLM_FUt10ns_C4ll1Ng_1s_G@0d!}
+            - HTTP_PROXY=http://127.0.0.1:7890
+            - HTTPS_PROXY=http://127.0.0.1:7890
+            - OPENAI_KEY=1145141919810
+        network_mode: host
+        container_name: zjnuctf20204-llm_a1_h4ck
