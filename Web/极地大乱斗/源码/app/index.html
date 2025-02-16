@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嚎哭深渊</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('./img/index.png');
+            background-size:cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+        }
+
+        h2, label {
+            color: white;
+        }
+
+        #nameForm {
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #welcomeMessage, #readLink {
+            color: white;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<h2>欢迎召唤师！请选择你的英雄</h2>
+<form id="nameForm">
+    <label for="name">选择的英雄为:</label>
+    <input type="text" id="name" name="name" required>
+    <button type="submit">开始大乱斗吧！</button>
+</form>
+
+<div id="welcomeMessage"></div>
+<div id="readLink"></div>
+
+<script>
+    var readLink = null;
+    document.getElementById('nameForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+
+        var name = document.getElementById('name').value;
+
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('welcomeMessage').innerText = xhr.responseText;
+
+
+                if (readLink === null) {
+                    readLink = document.createElement('a');
+                    readLink.href = 'read.html';
+                    readLink.innerText = '<--- 看看每条路上发生了什么！ --->';
+                    document.getElementById('readLink').appendChild(readLink);
+                }
+
+            }
+        };
+
+        xhr.open('POST', 'index.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send('name=' + encodeURIComponent(name));
+    });
+</script>
+</body>
+</html>

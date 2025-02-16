@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对线期</title>
+</head>
+<body>
+<h2>输入文件名字，看看对应分路发生了什么</h2>
+<form id="fileForm">
+    <label for="file">你想看那条路呢：</label>
+    <input type="text" id="file" name="file" required>
+    <button type="submit">脸探草丛</button>
+</form>
+
+<div id="fileContent"></div>
+
+<script>
+    document.getElementById('fileForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var file = document.getElementById('file').value;
+
+        // 使用 AJAX 发送文件名到后端
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    document.getElementById('fileContent').innerHTML = xhr.responseText;
+                } else {
+                    alert('请求失败，状态码: ' + xhr.status);
+                }
+            }
+        };
+
+
+        xhr.open('POST', 'read.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send('file=' + encodeURIComponent(file));
+    });
+</script>
+</body>
+</html>
